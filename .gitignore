@@ -1,2 +1,3 @@
 venv
 wsgi.sock
+.idea
