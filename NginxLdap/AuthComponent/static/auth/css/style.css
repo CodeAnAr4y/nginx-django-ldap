@@ -1,0 +1,17 @@
+body{
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+form div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.test{
+    color: red;
+}
