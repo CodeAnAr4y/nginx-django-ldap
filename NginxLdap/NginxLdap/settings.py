@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://localhost:88']
 
 # Application definition
 
@@ -50,12 +52,36 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTH_LDAP_SERVER_URI = "ldap://comelfo.com:389"
+AUTH_LDAP_BIND_DN = "cn=admin,dc=sme-soft,dc=by"
+AUTH_LDAP_BIND_PASSWORD = os.getenv('AUTH_LDAP_BIND_PASSWORD')
+
+import ldap 
+from django_auth_ldap.config import LDAPSearch
+
+AUTH_LDAP_USER_SEARCH = LDAPSearch("ou=people,dc=sme-soft,DC=by", 
+                                   ldap.SCOPE_SUBTREE, 
+                                   "(uid=%(user)s)")
+
+AUTHENTICATION_BACKENDS = ( 
+    "django_auth_ldap.backend.LDAPBackend", 
+    # "django.contrib.auth.backends.ModelBackend", 
+)
+
+REST_FRAMEWORK = { 
+    'DEFAULT_AUTHENTICATION_CLASSES': ( 
+        'rest_framework.authentication.SessionAuthentication', 
+    ), 
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 ROOT_URLCONF = 'NginxLdap.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

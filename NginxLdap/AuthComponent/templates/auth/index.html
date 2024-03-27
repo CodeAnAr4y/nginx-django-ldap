@@ -1,49 +1,20 @@
 {% extends 'base.html' %} {% block content %}
-<h1 style="text-align: center">LDAP authentication</h1>
+<h1 style="text-align: center;">LDAP authentication</h1>
 
-<form action="/connect_to_ldap" method="post">
+<div style="display: flex; justify-content: center;">
+<form action="/login" method="post">
   {% csrf_token %}
-  <div class="test">
-    <label for="server_url">Server URL:</label>
-    <input
-      id="server_url"
-      name="server_url"
-      type="text"
-      placeholder="example.com"
-    />
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <p style="margin: 4px 0;" for="uid">User id:</p>
+    <input name="uid" type="text" placeholder="name_surename" />
+  </div> 
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <p  style="margin: 4px 0;" for="pass">Password:</p>
+    <input name="pass" type="password" />
   </div>
-  <div>
-    <label for="server_port">Server port:</label>
-    <input
-      id="server_port"
-      name="server_port"
-      type="number"
-      placeholder="389"
-    />
-  </div>
-  <div>
-    <label for="uid">User uid:</label>
-    <input id="uid" name="uid" type="text" placeholder="name_surename" />
-  </div>
-  <div>
-    <label for="ou">Organizational Unit:</label>
-    <input id="ou" name="ou" type="text" placeholder="people" />
-  </div>
-  <div>
-    <label for="dc1">Domain Component 1:</label>
-    <input id="dc1" name="dc1" type="text" placeholder="domain" />
-  </div>
-  <div>
-    <label for="dc2">Domain Component 2:</label>
-    <input id="dc2" name="dc2" type="text" placeholder="com" />
-  </div>
-  <div>
-    <label for="pass">Password:</label>
-    <input id="pass" name="pass" type="password" />
-  </div>
-  <div>
-    <label></label>
+  <div style="margin-bottom: 8px; text-align: end;">
     <button type="submit">Connect</button>
   </div>
 </form>
+</div>
 {% endblock %}
