@@ -1,0 +1,13 @@
+[Unit]
+Description=Django LDAP service
+After=network.target
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+WorkingDirectory=/var/www/nginx-django-ldap-app/NginxLdap
+Environment="PATH=/var/www/nginx-django-ldap-app/venv/bin"
+ExecStart=/var/www/nginx-django-ldap-app/venv/bin/python3 manage.py runserver 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
