@@ -54,7 +54,7 @@ MIDDLEWARE = [
 
 AUTH_LDAP_SERVER_URI = "ldap://comelfo.com:389"
 AUTH_LDAP_BIND_DN = "cn=admin,dc=sme-soft,dc=by"
-AUTH_LDAP_BIND_PASSWORD = os.getenv('AUTH_LDAP_BIND_PASSWORD')
+AUTH_LDAP_BIND_PASSWORD = '9tryw34$4tfRt'
 
 import ldap 
 from django_auth_ldap.config import LDAPSearch
